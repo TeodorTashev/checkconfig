@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorilla Mind Supplement Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Gorilla images (desktop only) -->
+        <div class="gorilla-left"></div>
+        <div class="gorilla-right"></div>
+        <div class="gorilla-left-up"></div>
+        <div class="gorilla-right-up"></div>
+
+        <!-- Progress bar -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Quiz content -->
+        <div id="quiz-content">
+            <!-- Question screens will be dynamically inserted here -->
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="navigation-buttons">
+            <button id="prev-btn" class="btn secondary-btn" disabled>Previous</button>
+            <button id="next-btn" class="btn primary-btn">Next</button>
+            <button id="submit-btn" class="btn primary-btn" style="display: none;">Submit</button>
+        </div>
+    </div>
+
+    <!-- Templates for question types -->
+    <template id="single-select-template">
+        <div class="question-screen">
+            <h2 class="question-text"></h2>
+            <div class="options-container single-select">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="multi-select-template">
+        <div class="question-screen">
+            <h2 class="question-text"></h2>
+            <div class="options-container multi-select">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="text-input-template">
+        <div class="question-screen">
+            <h2 class="question-text"></h2>
+            <div class="input-container">
+                <input type="text" class="text-input" placeholder="Your answer...">
+            </div>
+        </div>
+    </template>
+
+    <template id="age-slider-template">
+        <div class="question-screen">
+            <h2 class="question-text"></h2>
+            <div class="slider-container">
+                <input type="range" min="0" max="8" value="0" class="age-slider">
+                <div class="age-labels">
+                    <span>18-25</span>
+                    <span>25-30</span>
+                    <span>30-35</span>
+                    <span>35-40</span>
+                    <span>40-45</span>
+                    <span>45-50</span>
+                    <span>50-55</span>
+                    <span>55-60</span>
+                    <span>60+</span>
+                </div>
+                <div class="selected-age">18-25</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="contact-template">
+        <div class="question-screen">
+            <h2>Almost there! Let's get your information</h2>
+            <div class="contact-form">
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="clarifying-questions-template">
+        <div class="question-screen">
+            <h2>Let's clarify a few things...</h2>
+            <div id="clarifying-questions-container">
+                <!-- Dynamically inserted clarifying questions -->
+            </div>
+        </div>
+    </template>
+
+    <template id="results-template">
+        <div class="results-screen">
+            <h2>Your Personalized Supplement Recommendations</h2>
+            <div class="results-container">
+                <!-- Dynamically inserted recommendations -->
+            </div>
+            <div class="discount-code">
+                <p>Use code <strong>kur</strong> for a special discount!</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- Update script imports -->
+    <script type="module" src="config.js"></script>
+    <script type="module" src="api-service.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

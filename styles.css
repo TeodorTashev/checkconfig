@@ -1,0 +1,563 @@
+:root {
+    --primary-color: #ff5500;
+    --secondary-color: #222222;
+    --text-color: #ffffff;
+    --bg-color: #111111;
+    --input-bg: #333333;
+    --border-color: #444444;
+    --hover-color: #ff7700;
+    --transition-speed: 0.3s;
+    --font-family: 'Barlow Condensed', sans-serif;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://i.imgur.com/JWKVtZt.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: -1;
+}
+
+.quiz-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: var(--box-shadow);
+    z-index: 1;
+    min-height: 500px;
+    transition: all var(--transition-speed);
+}
+
+.gorilla-left, .gorilla-right, .gorilla-left-up, .gorilla-right-up {
+    position: fixed;
+    height: 80vh;
+    width: 25vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.gorilla-left {
+    left: 0;
+    bottom: 0;
+    background-image: url('photos/left.png');
+}
+
+.gorilla-right {
+    right: 0;
+    bottom: 0;
+    background-image: url('photos/right.png');
+}
+
+.gorilla-left-up {
+    left: 0;
+    top: 5vh;
+    background-image: url('photos/leftdown.png');
+    display: none;
+}
+
+.gorilla-right-up {
+    right: 0;
+    top: 5vh;
+    background-image: url('photos/rightdown.png');
+    display: none;
+}
+
+.progress-container {
+    height: 10px;
+    width: 100%;
+    background-color: var(--input-bg);
+    border-radius: 5px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+.question-screen, .results-screen {
+    padding: 20px 10px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option {
+    padding: 15px;
+    background-color: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.option:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.option.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.option.checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.input-container {
+    margin: 20px 0;
+}
+
+.text-input, 
+.contact-form input {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 16px;
+    transition: border-color var(--transition-speed);
+    font-family: var(--font-family);
+}
+
+.text-input:focus, 
+.contact-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.checkbox-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Styling for No Health Concerns/No Digestive Issues as buttons */
+.no-issues-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.no-issues-btn:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.no-issues-btn input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.no-issues-btn .checkbox-label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* When checkbox is checked, style the button similar to a selected option */
+.no-issues-btn input[type="checkbox"]:checked + .checkbox-label {
+    color: var(--primary-color);
+}
+
+.no-issues-btn input[type="checkbox"]:checked {
+    accent-color: var(--primary-color);
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.navigation-buttons.hidden {
+    display: none;
+    opacity: 0;
+}
+
+#prev-button, #next-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+#prev-button.hidden, #next-button.hidden {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Low opacity buttons */
+.low-opacity-btn {
+    opacity: 0.15 !important;
+    pointer-events: none; /* Prevents clicks when faded */
+    transition: opacity var(--transition-speed);
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    font-family: var(--font-family);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.primary-btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+}
+
+.secondary-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.slider-container {
+    position: relative;
+    padding: 20px 10px;
+    margin-top: 40px;
+}
+
+.age-slider {
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--input-bg);
+    border-radius: 5px;
+    outline: none;
+}
+
+.age-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.age-slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.age-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.selected-age {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: var(--primary-color);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.error-message {
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: 5px;
+    height: 20px;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.product-recommendation {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: 15px;
+    flex: 1;
+}
+
+.product-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.product-reason {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.product-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.product-link:hover {
+    text-decoration: underline;
+}
+
+.discount-code {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+#clarifying-questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Reduced from 30px */
+}
+
+.clarifying-question {
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    padding: 18px; /* Reduced from 20px */
+    margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.clarifying-question h3 {
+    font-size: 17px; /* Reduced from 18px */
+    margin-bottom: 13px; /* Reduced from 15px */
+    color: var(--primary-color);
+}
+
+.clarifying-question textarea {
+    font-size: 15px;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1200px) {
+    .gorilla-left, .gorilla-right {
+        width: 20vw;
+    }
+}
+
+@media (max-width: 900px) {
+    .gorilla-left, .gorilla-right {
+        width: 15vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .gorilla-left, .gorilla-right {
+        display: none;
+    }
+
+    .quiz-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .option {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .age-labels {
+        font-size: 10px;
+    }
+
+    .product-recommendation {
+        flex-direction: column;
+    }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+    }
+}
