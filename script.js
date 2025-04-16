@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             type: "single-select",
             options: [
                 { text: "5–7 days", value: "5-7" },
+                { text: "4–6 days", value: "4-6" },
                 { text: "3–4 days", value: "3-4" },
                 { text: "1–2 days", value: "1-2" },
                 { text: "0 (not currently training)", value: "0" }
@@ -255,10 +256,8 @@ document.addEventListener('DOMContentLoaded', function() {
         displayQuestion(currentQuestionIndex);
         updateProgressBar();
         
-        // Set initial opacity for previous button on first question
-        if (currentQuestionIndex === 0) {
-            prevBtn.classList.add('low-opacity-btn');
-        }
+        // Set initial opacity for next button
+        nextBtn.classList.add('initial-state');
         
         // Event listeners
         prevBtn.addEventListener('click', goToPreviousQuestion);
@@ -685,6 +684,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextBtn.style.display = 'none';
             } else {
                 nextBtn.style.display = 'block';
+                // Remove initial state class when going back
+                nextBtn.classList.remove('initial-state');
                 // Check if the question is already answered
                 if (isQuestionAnswered(currentQuestion)) {
                     nextBtn.classList.remove('low-opacity-btn');

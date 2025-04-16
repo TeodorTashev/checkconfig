@@ -299,6 +299,13 @@ input[type="checkbox"] {
     transition: opacity var(--transition-speed);
 }
 
+/* Initial state for next button */
+#next-btn.initial-state {
+    opacity: 0.15 !important;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
 .btn {
     padding: 12px 25px;
     border: none;
