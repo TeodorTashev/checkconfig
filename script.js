@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
             type: "single-select",
             options: [
                 { text: "5–7 days", value: "5-7" },
-                { text: "4–6 days", value: "4-6" },
                 { text: "3–4 days", value: "3-4" },
                 { text: "1–2 days", value: "1-2" },
                 { text: "0 (not currently training)", value: "0" }
@@ -394,8 +393,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Update next button opacity based on selection
                         if (userAnswers[question.id] && userAnswers[question.id].length > 0) {
                             nextBtn.classList.remove('low-opacity-btn');
+                            nextBtn.style.pointerEvents = 'auto';
                         } else {
                             nextBtn.classList.add('low-opacity-btn');
+                            nextBtn.style.pointerEvents = 'none';
                         }
                     };
                     
@@ -421,10 +422,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Set next button to low opacity initially for multi-select
                 nextBtn.classList.add('low-opacity-btn');
+                nextBtn.style.pointerEvents = 'none';
                 
                 // If answers were already selected, make next button fully visible
                 if (userAnswers[question.id] && userAnswers[question.id].length > 0) {
                     nextBtn.classList.remove('low-opacity-btn');
+                    nextBtn.style.pointerEvents = 'auto';
                 }
                 break;
                 
